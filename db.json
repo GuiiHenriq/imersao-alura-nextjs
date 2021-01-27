@@ -1,5 +1,5 @@
 {
-  "bg": "https://pixabay.com/get/g4312b7945c2b42a778e88ff78ba063ed850ed127c99660b1f9db018e6b4e8036be1d859aa7efe3aeed0ec7bdab2afa21.jpg",
+  "bg": "assets/bg.jpg",
   "title": "Quiz CSS da Alura",
   "description": "Teste os seus conhecimentos sobre CSS e vamos ver quantos layouts você vai deixar de quebrar",
   "questions": [

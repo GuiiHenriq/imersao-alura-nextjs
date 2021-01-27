@@ -1,22 +1,23 @@
-import styled from 'styled-components'
-import db from '../db.json'
-import Widget from '../src/components/Widget'
-import Footer from '../src/components/Footer'
-import GitHubCorner from '../src/components/GitHubCorner'
-import QuizBackground from '../src/components/QuizBackground'
+import React from 'react';
+import styled from 'styled-components';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 
-const Title = styled.h1`
-  font-size: 50px;
-  color: ${({ theme }) => theme.colors.primary};
-`
+import db from '../db.json';
+import Widget from '../src/components/Widget';
+import Footer from '../src/components/Footer';
+import GitHubCorner from '../src/components/GitHubCorner';
+import QuizBackground from '../src/components/QuizBackground';
 
-/*function Title(props) { // O QUE É GERADO
+
+
+/* function Title(props) { // O QUE É GERADO
   return (
     <h1>
       {props.children}
     </h1>
   )
-}*/
+} */
 
 export const QuizContainer = styled.div`
   width: 100%;
@@ -27,19 +28,33 @@ export const QuizContainer = styled.div`
     margin: auto;
     padding: 15px;
   }
-`
+`;
 
 export default function Home() {
+  const router = useRouter();
+  const [name, setName] = React.useState('');
+
   return (
-    
     <QuizBackground backgroundImage={db.bg}>
+      <Head>
+        <title>Meu Quiz</title>
+      </Head>
       <QuizContainer>
         <Widget>
           <Widget.Header>
             <h1>Titulo</h1>
           </Widget.Header>
           <Widget.Content>
-            <h1>Content</h1>
+            <form onSubmit={function(infosDoEvento) {
+              infosDoEvento.preventDefault();
+              router.push(`/quiz?name=${name}`);
+            }}>
+              <input type="text" placeholder="Qual seu Nome?!?" onChange={function(nome) {
+                //name = nome.target.value;
+                setName(nome.target.value)
+              }}/>
+              <button type="submit" disabled={name.length === 0}>Bora Jogar {name}?</button>
+            </form>
           </Widget.Content>
         </Widget>
 
@@ -54,5 +69,5 @@ export default function Home() {
       <GitHubCorner projectUrl="https://github.com/GuiiHenriq" />
     </QuizBackground>
 
-  )
+  );
 }
